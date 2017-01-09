@@ -39,7 +39,7 @@ def ocr(access_token, image_path):
 
     response = requests.post(url=url, headers=headers, params=payload, data=data)
     words = ''
-    if response.status_code == '200':
+    if response.status_code == 200:
         words_result = json.loads(response.text)['words_result']
 
         for words_item in words_result:
