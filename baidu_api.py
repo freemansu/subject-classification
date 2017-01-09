@@ -1,3 +1,5 @@
+# coding=utf-8
+
 import json
 
 import requests
@@ -29,15 +31,21 @@ def ocr(access_token, image_path):
     payload = {
         'access_token': access_token
     }
-    encoded_string.replace('\/', '%')
-    data = 'image=' + encoded_string
+
+    data = {
+        'image': encoded_string
+        # 'detect_direction': 'true'
+    }
 
     response = requests.post(url=url, headers=headers, params=payload, data=data)
-    words_result = json.loads(response.text)['words_result']
-    for words_item in words_result:
-        print words_item['words']
+    words = ''
+    if response.status_code == '200':
+        words_result = json.loads(response.text)['words_result']
 
-    print response.text
+        for words_item in words_result:
+            words += words_item['words']
+
+    return words
 
 
 if __name__ == '__main__':
@@ -45,4 +53,4 @@ if __name__ == '__main__':
     config = json.load(open(filename))
     # access_token = get_access_token(config=config)
 
-    ocr(config['access_token'], 'images/01.jpg')
+    print ocr(config['access_token'], 'images/01.jpg')
