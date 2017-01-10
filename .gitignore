@@ -3,3 +3,4 @@
 images/*
 ocr_result/*
 *.pyc
+word_segmentation_result/*
