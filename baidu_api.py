@@ -40,8 +40,8 @@ def ocr(access_token, image_path):
     response = requests.post(url=url, headers=headers, params=payload, data=data)
     words = ''
     if response.status_code == 200:
+        print response.text
         words_result = json.loads(response.text)['words_result']
-
         for words_item in words_result:
             words += words_item['words']
 
@@ -51,6 +51,6 @@ def ocr(access_token, image_path):
 if __name__ == '__main__':
     filename = 'config.json'
     config = json.load(open(filename))
-    # access_token = get_access_token(config=config)
-
+    access_token = get_access_token(config=config)
+    print access_token
     print ocr(config['access_token'], 'images/01.jpg')

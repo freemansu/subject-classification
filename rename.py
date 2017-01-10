@@ -8,5 +8,5 @@ for subdir in os.listdir(images_dir):
     for filename in os.listdir(images_dir + '/' + subdir):
         if filename.endswith('.jpg'):
             path = './' + images_dir + '/' + subdir + '/'
-            os.rename(path + filename, path + subdir + str(i) + '.jpg')
+            os.rename(path + filename, path + subdir + str(i).zfill(3) + '.jpg')
             i += 1
