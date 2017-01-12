@@ -52,13 +52,17 @@ if __name__ == '__main__':
     new_grocery = Grocery('sample')
     new_grocery.load()
     true_num = 0
-    for (real, text) in test_data:
+    print 'actual\t|\tpredict\t|\ttrue?'
+    print '----------------------------'
+    for (actual, text) in test_data:
         predict = new_grocery.predict(text)
-        is_true = 'true' if real == predict.predicted_y else 'false'
+        is_true = 'true' if actual == predict.predicted_y else 'false'
         if is_true == 'true':
             true_num += 1
-        print 'real: {real} <---> predict: {predict} | {is_true}'.format(real=real, predict=predict, is_true=is_true)
+        print '{actual}\t|\t{predict}\t|\t{is_true}'.format(actual=actual, predict=predict, is_true=is_true)
 
+    print '----------------------------'
     print '训练数据集大小: {size}'.format(size=train_data_size)
     print '测试数据集大小: {size}'.format(size=test_data_size)
+    print '正确数: {true_num}    错误数: {false_num}'.format(true_num=true_num, false_num=test_data_size-true_num)
     print '准确率: {accuracy}%'.format(accuracy=float(100.0 * true_num / test_data_size))
